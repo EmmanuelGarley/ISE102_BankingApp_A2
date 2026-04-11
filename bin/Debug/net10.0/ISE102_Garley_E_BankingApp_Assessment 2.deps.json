@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v10.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v10.0": {
+      "ISE102_Garley_E_BankingApp_Assessment 2/1.0.0": {
+        "runtime": {
+          "ISE102_Garley_E_BankingApp_Assessment 2.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "ISE102_Garley_E_BankingApp_Assessment 2/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
