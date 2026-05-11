@@ -1,0 +1,31 @@
+USE CASE DIAGRAM - NSW BANK APPLICATION
+
+Actor:
+- Bank User
+
+Use Cases:
+- Sign Up
+- Login
+- Deposit Money
+- Withdraw Money
+- View Balance
+- View Transaction History
+- Logout
+
+Diagram:
+
+                 +--------------------------------------+
+                 |        NSW Bank Application          |
+                 |                                      |
+Bank User ------>|  Sign Up                             |
+Bank User ------>|  Login                               |
+Bank User ------>|  Deposit Money                       |
+Bank User ------>|  Withdraw Money                      |
+Bank User ------>|  View Balance                        |
+Bank User ------>|  View Transaction History            |
+Bank User ------>|  Logout                              |
+                 |                                      |
+                 +--------------------------------------+
+
+Explanation:
+The Bank User interacts with the banking application by signing up, logging in, and then accessing banking functions. Deposit, withdraw, view balance, and transaction history are only available after successful login.

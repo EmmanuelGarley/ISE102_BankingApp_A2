@@ -1,0 +1,40 @@
+ISE102 Assessment 3 - Test Cases
+
+Test Case 1: Valid login
+Input:
+Username: Joe.Doe
+Password: Password123
+Expected Result:
+Login successful. User reaches the banking menu.
+
+Test Case 2: Valid deposit
+Input:
+Deposit amount: 200
+Expected Result:
+Deposit is accepted. Balance increases from $1000.00 to $1200.00.
+
+Test Case 3: Invalid deposit with non-numerical input
+Input:
+Deposit amount: abc
+Expected Result:
+Program displays: Only numerical data can be entered.
+Program does not crash and asks again.
+
+Test Case 4: Invalid withdrawal due to insufficient funds
+Input:
+Withdraw amount: 5000
+Expected Result:
+Program displays: Not sufficient fund available.
+Balance remains unchanged.
+
+Test Case 5: Valid withdrawal
+Input:
+Withdraw amount: 100
+Expected Result:
+Withdrawal is successful. Balance decreases correctly.
+
+Test Case 6: Withdrawal session limit
+Input:
+Attempt 4 successful withdrawals in one login session.
+Expected Result:
+Program blocks the 4th withdrawal and displays withdrawal limit message.

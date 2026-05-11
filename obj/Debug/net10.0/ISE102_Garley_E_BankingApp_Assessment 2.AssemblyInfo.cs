@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ISE102_Garley_E_BankingApp_Assessment 2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b8642326b91a689184c7e923fadd3e933a343230")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c950d63d2f7f7e5a14f2882e54b3e4578cbcdb22")]
 [assembly: System.Reflection.AssemblyProductAttribute("ISE102_Garley_E_BankingApp_Assessment 2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ISE102_Garley_E_BankingApp_Assessment 2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

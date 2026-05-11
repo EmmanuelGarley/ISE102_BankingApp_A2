@@ -1,0 +1,55 @@
+ACTIVITY DIAGRAM - NSW BANK APPLICATION
+
+Start
+  |
+  v
+Display Main Menu
+  |
+  +--> Sign Up
+  |      |
+  |      v
+  |   Enter username, email, age, phone, password
+  |      |
+  |      v
+  |   Validate input
+  |      |
+  |      +--> Invalid input --> Show error --> Return to Sign Up
+  |      |
+  |      +--> Valid input --> Create User Account --> Return to Main Menu
+  |
+  +--> Login
+  |      |
+  |      v
+  |   Enter username and password
+  |      |
+  |      v
+  |   Verify credentials
+  |      |
+  |      +--> Invalid credentials --> Retry up to 3 times --> Return to Main Menu
+  |      |
+  |      +--> Valid credentials --> Show Banking Menu
+  |                                  |
+  |                                  +--> Deposit
+  |                                  |      |
+  |                                  |      +--> Validate amount
+  |                                  |      +--> Add to balance
+  |                                  |
+  |                                  +--> Withdraw
+  |                                  |      |
+  |                                  |      +--> Validate amount
+  |                                  |      +--> Check sufficient funds
+  |                                  |      +--> Deduct from balance
+  |                                  |
+  |                                  +--> View Balance
+  |                                  |
+  |                                  +--> View Transaction History
+  |                                  |
+  |                                  +--> Logout
+  |
+  +--> Exit
+         |
+         v
+       End
+
+Explanation:
+The activity diagram shows the flow of the application from the main menu through signup, login, and authenticated banking operations. Invalid inputs return the user safely to the correct step without crashing the program.
