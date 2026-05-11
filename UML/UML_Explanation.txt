@@ -1,0 +1,14 @@
+UML EXPLANATION - NSW BANK APPLICATION
+
+The use case diagram identifies the main user requirements of the banking application. It shows that the Bank User can sign up, log in, deposit money, withdraw money, view balance, view transaction history, and log out.
+
+The activity diagram shows the step-by-step flow of the software. It helps verify that the program handles both valid and invalid inputs safely. For example, invalid login attempts return the user to the correct point instead of terminating the program.
+
+The class diagram shows the object-oriented design of the application. It identifies the main classes, their attributes, methods, and relationships. The Bank class contains a list of UserAccount objects, showing a one-to-many relationship between the bank and its users.
+
+UML is useful in software specification because it helps developers understand what the system should do before writing code. It is also useful for verification and validation because the final code can be checked against the diagrams to confirm that the implemented features match the planned design.
+
+Other UML diagrams that could be used in a similar software project include:
+- Sequence diagram: to show the order of messages between objects during login or deposit.
+- State diagram: to show account states such as logged out, logged in, active, or locked.
+- Component diagram: to show larger software components if the system became a full online banking application.

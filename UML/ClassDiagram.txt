@@ -1,0 +1,78 @@
+CLASS DIAGRAM - NSW BANK APPLICATION
+
++--------------------------------------------------+
+| UserAccount                                      |
++--------------------------------------------------+
+| - _username : string                             |
+| - _email : string                                |
+| - _age : int                                     |
+| - _phone : string                                |
+| - _password : string                             |
+| - _balance : decimal                             |
+| - _transactionHistory : List<string>             |
++--------------------------------------------------+
+| + UserAccount(username, email, age, phone,        |
+|   password, openingBalance)                      |
+| + GetUsername() : string                         |
+| + GetEmail() : string                            |
+| + GetAge() : int                                 |
+| + GetPhone() : string                            |
+| + GetBalance() : decimal                         |
+| + VerifyPassword(inputPassword) : bool           |
+| + IncreaseBalance(amount) : void                 |
+| + DecreaseBalance(amount) : void                 |
+| + GetTransactionHistory() : List<string>         |
+| + GetSummary() : string                          |
++--------------------------------------------------+
+
+
++--------------------------------------------------+
+| Bank                                             |
++--------------------------------------------------+
+| - _users : List<UserAccount>                     |
++--------------------------------------------------+
+| + Bank()                                         |
+| + Signup(username, email, age, phone, password)  |
+|   : bool                                         |
+| + Login(username, password) : UserAccount?       |
+| + Deposit(user, amount) : bool                   |
+| + Withdraw(user, amount) : bool                  |
+| + ViewBalance(user) : void                       |
+| + UsernameExists(username) : bool                |
+| + EmailExists(email) : bool                      |
+| + PhoneExists(phone) : bool                      |
+| + GetAllUsers() : List<UserAccount>              |
++--------------------------------------------------+
+
+
++--------------------------------------------------+
+| ConsoleHelper                                    |
++--------------------------------------------------+
+| + ReadRequiredString(prompt) : string            |
+| + ReadPositiveInt(prompt) : int                  |
+| + ReadDecimal(prompt) : decimal                  |
+| + ShowHeader(title) : void                       |
+| + Pause() : void                                 |
++--------------------------------------------------+
+
+
++--------------------------------------------------+
+| Program                                          |
++--------------------------------------------------+
+| + Main(args) : void                              |
+| - RunSignup(bank) : void                         |
+| - RunLogin(bank) : void                          |
+| - RunBankingMenu(bank, user) : void              |
+| - ShowTransactionHistory(user) : void            |
+| - ShowRegisteredUsers(bank) : void               |
++--------------------------------------------------+
+
+
+Relationships:
+Bank "1" ---- "many" UserAccount
+Program uses Bank
+Program uses ConsoleHelper
+Bank uses UserAccount
+
+Explanation:
+The Bank class manages a collection of UserAccount objects using List<UserAccount>. This supports multiple registered users. The Program class controls the menu flow and delegates business logic to the Bank class. ConsoleHelper supports reusable input handling and reduces repeated code.
