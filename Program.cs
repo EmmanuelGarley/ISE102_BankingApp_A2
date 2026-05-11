@@ -9,26 +9,25 @@ namespace ISE102_A2_BankingApp
     {
         static void Main(string[] args)
         {
-            // Create one Bank object to manage all login and signup operations.
             Bank bank = new Bank();
-
             bool running = true;
 
             while (running)
             {
-                ConsoleHelper.ShowHeader("NSW Bank Application - Assessment 2 By Emmanuel Garley & Deeanne Kirby");
+                ConsoleHelper.ShowHeader("NSW Bank Application - Assessment 3");
                 Console.WriteLine("1. Sign Up");
                 Console.WriteLine("2. Login");
                 Console.WriteLine("3. View Registered Users (Demo/Testing)");
                 Console.WriteLine("4. Exit");
                 Console.Write("\nChoose an option: ");
-                string? choice = Console.ReadLine(); // Read the user's choice
 
-                switch (choice) // Switch statement to handle the user's choice
+                string? choice = Console.ReadLine();
+
+                switch (choice)
                 {
                     case "1":
                         RunSignup(bank);
-                        break; // Break out of the switch statement
+                        break;
 
                     case "2":
                         RunLogin(bank);
@@ -51,61 +50,54 @@ namespace ISE102_A2_BankingApp
             }
         }
 
-        /// <summary>
-        /// Handles the signup workflow.
-        /// The implementation requires Username, Email, Age, Phone, and Password.
-        /// </summary>
         static void RunSignup(Bank bank)
         {
-            ConsoleHelper.ShowHeader("Sign Up"); // Show the sign up header
+            ConsoleHelper.ShowHeader("Sign Up");
 
-            string username = ConsoleHelper.ReadRequiredString("Enter username: "); // Read the username
-            string email = ConsoleHelper.ReadRequiredString("Enter email: "); // Read the email
-            int age = ConsoleHelper.ReadPositiveInt("Enter age: "); // Read the age
-            string phone = ConsoleHelper.ReadRequiredString("Enter phone: "); // Read the phone
-            string password = ConsoleHelper.ReadRequiredString("Enter password: "); // Read the password
+            string username = ConsoleHelper.ReadRequiredString("Enter username: ");
+            string email = ConsoleHelper.ReadRequiredString("Enter email: ");
+            int age = ConsoleHelper.ReadPositiveInt("Enter age: ");
+            string phone = ConsoleHelper.ReadRequiredString("Enter phone: ");
+            string password = ConsoleHelper.ReadRequiredString("Enter password: ");
 
-            bool success = bank.Signup(username, email, age, phone, password); // Sign up the user
+            bool success = bank.Signup(username, email, age, phone, password);
 
             if (success)
             {
-                Console.WriteLine("\nValidation Tip: Try logging in with the same username and password."); // Prompt the user to try logging in with the same username and password
+                Console.WriteLine("\nValidation Tip: Try logging in with the same username and password.");
             }
 
             ConsoleHelper.Pause();
         }
 
-        /// <summary>
-        /// Handles the login workflow.
-        /// A 3-attempt limit is implemented for better security and user experience.
-        /// </summary>
         static void RunLogin(Bank bank)
         {
-            ConsoleHelper.ShowHeader("Login"); // Show the login header
+            ConsoleHelper.ShowHeader("Login");
 
-            int remainingAttempts = 3; // Set the remaining attempts to 3
+            int remainingAttempts = 3;
 
             while (remainingAttempts > 0)
             {
-                string username = ConsoleHelper.ReadRequiredString("Enter username: "); // Read the username
-                string password = ConsoleHelper.ReadRequiredString("Enter password: "); // Read the password
+                string username = ConsoleHelper.ReadRequiredString("Enter username: ");
+                string password = ConsoleHelper.ReadRequiredString("Enter password: ");
 
-                UserAccount? loggedInUser = bank.Login(username, password); // Login the user
+                UserAccount? loggedInUser = bank.Login(username, password);
 
                 if (loggedInUser != null)
                 {
                     Console.WriteLine("\nLogin successful.");
-                    ShowMainScreen(loggedInUser); // Show the main screen
                     ConsoleHelper.Pause();
+
+                    RunBankingMenu(bank, loggedInUser);
                     return;
                 }
 
-                remainingAttempts--; // Decrement the remaining attempts
-                Console.WriteLine($"\nInvalid username or password. Attempts remaining: {remainingAttempts}"); // Prompt the user to try again
+                remainingAttempts--;
+                Console.WriteLine($"\nInvalid username or password. Attempts remaining: {remainingAttempts}");
 
                 if (remainingAttempts == 0)
                 {
-                    Console.WriteLine("Too many failed login attempts. Returning to main menu."); // Prompt the user to try again
+                    Console.WriteLine("Too many failed login attempts. Returning to main menu.");
                 }
             }
 
@@ -113,41 +105,117 @@ namespace ISE102_A2_BankingApp
         }
 
         /// <summary>
-        /// Simulates the 'main screen' mentioned in the brief after successful login.
+        /// Assessment 3 banking menu.
+        /// This screen is shown only after the user successfully logs in.
         /// </summary>
-        static void ShowMainScreen(UserAccount user)
+        static void RunBankingMenu(Bank bank, UserAccount user)
         {
-            Console.WriteLine("\n========== Main Screen =========="); // Show the main screen header
-            Console.WriteLine($"Welcome, {user.GetUsername()}."); // Welcome the user
-            Console.WriteLine("You have successfully accessed the banking system."); // Prompt the user to have successfully accessed the banking system
-            Console.WriteLine("=================================");
+            bool loggedIn = true;
+            int withdrawalCount = 0;
+            const int maxWithdrawalsPerSession = 3;
+
+            while (loggedIn)
+            {
+                ConsoleHelper.ShowHeader($"Banking Menu - Welcome {user.GetUsername()}");
+                Console.WriteLine("1. Deposit");
+                Console.WriteLine("2. Withdraw");
+                Console.WriteLine("3. View Balance");
+                Console.WriteLine("4. View Transaction History");
+                Console.WriteLine("5. Logout");
+                Console.Write("\nChoose an option: ");
+
+                string? choice = Console.ReadLine();
+
+                switch (choice)
+                {
+                    case "1":
+                        decimal depositAmount = ConsoleHelper.ReadDecimal("Enter deposit amount: ");
+                        bank.Deposit(user, depositAmount);
+                        ConsoleHelper.Pause();
+                        break;
+
+                    case "2":
+                        if (withdrawalCount >= maxWithdrawalsPerSession)
+                        {
+                            Console.WriteLine("Withdrawal limit reached for this login session.");
+                            ConsoleHelper.Pause();
+                            break;
+                        }
+
+                        decimal withdrawAmount = ConsoleHelper.ReadDecimal("Enter withdrawal amount: ");
+                        bool withdrawalSuccessful = bank.Withdraw(user, withdrawAmount);
+
+                        if (withdrawalSuccessful)
+                        {
+                            withdrawalCount++;
+                        }
+
+                        Console.WriteLine($"Withdrawals used this session: {withdrawalCount}/{maxWithdrawalsPerSession}");
+                        ConsoleHelper.Pause();
+                        break;
+
+                    case "3":
+                        bank.ViewBalance(user);
+                        ConsoleHelper.Pause();
+                        break;
+
+                    case "4":
+                        ShowTransactionHistory(user);
+                        break;
+
+                    case "5":
+                        loggedIn = false;
+                        Console.WriteLine("Logged out successfully.");
+                        ConsoleHelper.Pause();
+                        break;
+
+                    default:
+                        Console.WriteLine("Invalid choice. Please select 1, 2, 3, 4, or 5.");
+                        ConsoleHelper.Pause();
+                        break;
+                }
+            }
         }
 
         /// <summary>
-        /// Demo/testing screen to help produce evidence and screenshots.
-        /// This is an extra feature that also supports validation and demonstration.
+        /// Extra Assessment 3 feature:
+        /// Displays all account transactions recorded during the session.
         /// </summary>
-        static void ShowRegisteredUsers(Bank bank)
+        static void ShowTransactionHistory(UserAccount user)
         {
-            ConsoleHelper.ShowHeader("Registered Users - Demo/Testing"); // Show the registered users header
+            ConsoleHelper.ShowHeader("Transaction History");
 
-            var users = bank.GetAllUsers(); // Get all the users
+            var transactions = user.GetTransactionHistory();
 
-            if (users.Count == 0)
+            if (transactions.Count == 0)
             {
-                Console.WriteLine("No registered users found."); // Prompt the user to no registered users found
+                Console.WriteLine("No transactions recorded.");
             }
             else
             {
-                Console.WriteLine($"Total registered users: {users.Count}\n"); // Show the total number of registered users
-
-                for (int i = 0; i < users.Count; i++)
+                foreach (string transaction in transactions)
                 {
-                    Console.WriteLine($"{i + 1}. {users[i].GetSummary()}"); // Show the summary of the user
+                    Console.WriteLine(transaction);
                 }
             }
 
             ConsoleHelper.Pause();
-        } // Pause the program and wait for the user to press Enter
+        }
+
+        static void ShowRegisteredUsers(Bank bank)
+        {
+            ConsoleHelper.ShowHeader("Registered Users - Demo/Testing");
+
+            var users = bank.GetAllUsers();
+
+            Console.WriteLine($"Total registered users: {users.Count}\n");
+
+            for (int i = 0; i < users.Count; i++)
+            {
+                Console.WriteLine($"{i + 1}. {users[i].GetSummary()}");
+            }
+
+            ConsoleHelper.Pause();
+        }
     }
 }

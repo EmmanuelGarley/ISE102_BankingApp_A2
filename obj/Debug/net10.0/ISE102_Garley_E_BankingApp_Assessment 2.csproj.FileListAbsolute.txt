@@ -12,3 +12,4 @@ C:\Users\garle\Desktop\Uni Folders 2026 to 2029\Intro to Software Engineering Co
 C:\Users\garle\Desktop\Uni Folders 2026 to 2029\Intro to Software Engineering Course\ISE102_Garley_E_BankingApp_Assessment 2\obj\Debug\net10.0\ISE102_Garley_E_BankingApp_Assessment 2.pdb
 C:\Users\garle\Desktop\Uni Folders 2026 to 2029\Intro to Software Engineering Course\ISE102_Garley_E_BankingApp_Assessment 2\obj\Debug\net10.0\ISE102_Garley_E_BankingApp_Assessment 2.genruntimeconfig.cache
 C:\Users\garle\Desktop\Uni Folders 2026 to 2029\Intro to Software Engineering Course\ISE102_Garley_E_BankingApp_Assessment 2\obj\Debug\net10.0\ref\ISE102_Garley_E_BankingApp_Assessment 2.dll
+C:\Users\garle\Desktop\Uni Folders 2026 to 2029\Intro to Software Engineering Course\ISE102_Garley_E_BankingApp_Assessment 2\obj\Debug\net10.0\ISE102_Garley_E_BankingApp_Assessment 2.sourcelink.json
